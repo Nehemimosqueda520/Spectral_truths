@@ -6,6 +6,7 @@ public class CameraScript : MonoBehaviour
 {
 [SerializeField] private float MouseSensitivity = 80f;
 [SerializeField] private Transform Player;
+[SerializeField] private Transform Lantern;
 float RotationX = 0f;
 
     void Start()
@@ -24,6 +25,8 @@ float RotationX = 0f;
 
         transform.localRotation = Quaternion.Euler(RotationX, 0f, 0f);
         Player.Rotate(Vector3.up * MouseX);
+       Lantern.Rotate(Vector3.left * MouseY);
+
     }
        
 }
