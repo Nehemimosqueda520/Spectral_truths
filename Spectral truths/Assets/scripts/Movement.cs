@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private float gravity = -49.05f;
     private float speed = 200f;
     private float groundDistance = 0.4f;
-    private float jumpHeight = 20f;
     private bool isGrounded;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Transform groundCheck;
@@ -22,8 +21,6 @@ public class PlayerController : MonoBehaviour
         applyGravity();
         checkGrounded();
         movePlayer();
-        jump();
-
     }
 
     void movePlayer()
@@ -35,14 +32,6 @@ public class PlayerController : MonoBehaviour
         // Mover el jugador
         Vector3 move = transform.right * x + transform.forward * z;
         chController.Move(move * speed * Time.deltaTime);
-    }
-
-    void jump()
-    {
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
     }
 
     void checkGrounded()
