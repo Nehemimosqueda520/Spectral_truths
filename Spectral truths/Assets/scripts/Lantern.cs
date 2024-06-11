@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Lantern : MonoBehaviour
 {
-    private float targetXRotation; // More descriptive name
+    private float targetXRotation; 
 
     void Start()
     {
