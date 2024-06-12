@@ -353,10 +353,16 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.22f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Assets/scripts/CameraScript.cs"
-"Assets/scripts/Lantern.cs"
-"Assets/scripts/MainMenu.cs"
-"Assets/scripts/Movement.cs"
+"Assets/Scripts/CameraScript.cs"
+"Assets/Scripts/CursorAppearence.cs"
+"Assets/Scripts/GameManager.cs"
+"Assets/Scripts/Inventory.cs"
+"Assets/Scripts/Item.cs"
+"Assets/Scripts/ItemPickup.cs"
+"Assets/Scripts/Lantern.cs"
+"Assets/Scripts/MainMenu.cs"
+"Assets/Scripts/Movement.cs"
+"Assets/Scripts/PlayerInteractions.cs"
 -langversion:9.0
 
 /deterministic
