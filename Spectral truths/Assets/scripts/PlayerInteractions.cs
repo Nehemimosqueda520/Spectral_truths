@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlayerInteractions : MonoBehaviour
 {
     private float interactRange = 60f;
-    [SerializeField] Camera playerCamera;
-    [SerializeField] LayerMask recolectableMask;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private LayerMask recolectableMask;
+    [SerializeField] private LayerMask pickUpMask;
+    [SerializeField] private Transform objectGrabPointTransform;
+
+    private GrabbableObject grabbableObject;
 
     void Update()
     {
@@ -28,6 +32,21 @@ public class PlayerInteractions : MonoBehaviour
             {
                 itemPickup.PickUp();
             }
+        } 
+        else if (Physics.Raycast(ray, out hit, interactRange, pickUpMask))
+        {
+            if(grabbableObject == null)
+            {
+                if (hit.transform.TryGetComponent(out grabbableObject))
+                {
+                    grabbableObject.Grab(objectGrabPointTransform);
+                }
+            } else
+            {
+                grabbableObject.Drop();
+                grabbableObject = null;
+            }
+
         }
     }
 }
