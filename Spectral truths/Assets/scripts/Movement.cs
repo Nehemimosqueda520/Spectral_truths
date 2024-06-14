@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         chController.Move(move * speed * Time.deltaTime);
     }
 
-    void checkGrounded()
+    void checkGrounded()    
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
     }
