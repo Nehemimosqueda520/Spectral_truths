@@ -2,7 +2,8 @@ using UnityEngine;
 public class FlashlightController : MonoBehaviour
 {
     // Referencia al componente de luz
-    public Light flashlight;
+    [SerializeField] private Light flashlight;
+    [SerializeField] private GameManager gameManager;
     
 
     void Start()
@@ -16,12 +17,16 @@ public class FlashlightController : MonoBehaviour
 
     void Update()
     {
-        // Verifica si el jugador hizo clic con el botón izquierdo del ratón
-        if (Input.GetMouseButtonDown(1))
+        if (!GameManager.isGamePaused)
         {
+            if (Input.GetMouseButtonDown(1))
+            {
 
-            ChangeLight();
+                ChangeLight();
+            }
         }
+       
+
     }
 
     void ChangeLight () {

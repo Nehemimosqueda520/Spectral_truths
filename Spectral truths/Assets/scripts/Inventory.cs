@@ -5,70 +5,36 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public List<Item> items = new List<Item>();
-    public GameObject inventoryUI;
-    public GameObject itemButtonPrefab;
+    private List<Item> items = new List<Item>();
+    private int currentItemIndex = 0;
 
-    public Transform content;
-
-    private bool isInventoryOpen = false;
-    private CursorLockMode previousLockMode;
-
-    void Start()
+    public void AddItem(Item item)
     {
-        inventoryUI.SetActive(false); 
+        items.Add(item);
     }
 
-    void Update()
+    public Item GetCurrentItem()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (items.Count > 0)
         {
-            ToggleInventory();
-            if (inventoryUI.activeSelf)
-            {
-                UpdateInventoryUI();
-            }
+            return items[currentItemIndex];
+        }
+        return null;
+    }
+
+    public void NextItem()
+    {
+        if (items.Count > 0)
+        {
+            currentItemIndex = (currentItemIndex + 1 + items.Count) % items.Count;
         }
     }
 
-    public void AddItem(Item newItem)
+    public void PreviousItem()
     {
-        items.Add(newItem);
-        UpdateInventoryUI();
-    }
-
-    public void UpdateInventoryUI()
-    {
-        foreach (Transform child in content)
+        if(items.Count > 0)
         {
-            Destroy(child.gameObject);
-        }
-
-        foreach (Item item in items)
-        {
-            GameObject button = Instantiate(itemButtonPrefab, content);
-            button.GetComponentInChildren<Text>().text = item.name;
-
+            currentItemIndex = (currentItemIndex - 1 + items.Count) % items.Count;
         }
     }
-
-    public void ToggleInventory()
-    {
-        isInventoryOpen = !isInventoryOpen;
-
-        if(isInventoryOpen)
-        {
-            inventoryUI.SetActive(true);
-            Cursor.visible = true;
-            previousLockMode = Cursor.lockState;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            inventoryUI.SetActive(false);
-            Cursor.lockState = previousLockMode;
-        }
-
-    }
-
 }

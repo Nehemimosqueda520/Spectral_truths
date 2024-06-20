@@ -5,24 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static bool isGamePaused = false;
-    void Start()
-    {
-        
-    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            isGamePaused = !isGamePaused;
-        }
+        Time.timeScale = isGamePaused ? 0f : 1f;
+        Cursor.lockState = isGamePaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isGamePaused;
+    }
 
-        if(isGamePaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+    public void TogglePausedGame()
+    {
+        isGamePaused = !isGamePaused;
     }
 }

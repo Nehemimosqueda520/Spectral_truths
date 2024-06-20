@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: RedCube
   m_EditorClassIdentifier: 
   itemName: RedCube
-  icon: {fileID: 0}
+  itemPrefab: {fileID: 2265403774383192126, guid: 183865cd3af222f4fb56cb11c0e4b4b7, type: 3}
+  itemIcon: {fileID: 21300000, guid: a01087ce1455c7e4c8f2410c26afcfd2, type: 3}

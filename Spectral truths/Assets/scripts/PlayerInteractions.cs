@@ -4,49 +4,34 @@ using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    private float interactRange = 60f;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private LayerMask recolectableMask;
     [SerializeField] private LayerMask pickUpMask;
     [SerializeField] private Transform objectGrabPointTransform;
+    [SerializeField] private Inventory playerInventory;
 
-    private GrabbableObject grabbableObject;
+    private float interactRange = 60f;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Interact();
+            CollectItem();
         } 
     }
-
-    void Interact()
+    private void CollectItem()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, interactRange, recolectableMask))
         {
-            ItemPickup itemPickup = hit.collider.GetComponent<ItemPickup>();
-            if (itemPickup != null)
+            Item item = hit.collider.GetComponent<ItemComponent>()?.item;
+            if (item != null)
             {
-                itemPickup.PickUp();
+                playerInventory.AddItem(item);
+                Destroy(hit.collider.gameObject);
             }
-        } 
-        else if (Physics.Raycast(ray, out hit, interactRange, pickUpMask))
-        {
-            if(grabbableObject == null)
-            {
-                if (hit.transform.TryGetComponent(out grabbableObject))
-                {
-                    grabbableObject.Grab(objectGrabPointTransform);
-                }
-            } else
-            {
-                grabbableObject.Drop();
-                grabbableObject = null;
-            }
-
         }
     }
 }

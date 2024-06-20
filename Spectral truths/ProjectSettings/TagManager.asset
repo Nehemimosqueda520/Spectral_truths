@@ -14,8 +14,8 @@ TagManager:
   - Ground
   - Player
   - Recolectable
-  - 
-  - 
+  - ItemCamera
+  - UIObject3D
   - 
   - 
   - 
