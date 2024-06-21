@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    private List<Item> items = new List<Item>();
+    public List<Item> items = new List<Item>();
     private int currentItemIndex = 0;
 
     public void AddItem(Item item)
