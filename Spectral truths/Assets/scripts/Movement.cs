@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController chController;
     private Vector3 velocity;
     private float gravity = -49.05f;
-    private float speed = 200f;
+    private float speed = 75f;
     private float groundDistance = 0.4f;
     private bool isGrounded;
     [SerializeField] private LayerMask groundMask;

@@ -1414,6 +1414,7 @@ GameObject:
   - component: {fileID: 1585774192}
   - component: {fileID: 1585774191}
   - component: {fileID: 1585774193}
+  - component: {fileID: 1585774194}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1502,6 +1503,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 119
   objectGrabPointTransform: {fileID: 120201324}
+--- !u!114 &1585774194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585774185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441422ab3365f244ebbcebc523177a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 1585774192}
+  playerCamera: {fileID: 1268871758}
+  crouchHeight: 1
+  normalHeight: 2
+  crouchSpeed: 2
+  cameraCrouchOffset: 0.5
 --- !u!1 &1624375055
 GameObject:
   m_ObjectHideFlags: 0
