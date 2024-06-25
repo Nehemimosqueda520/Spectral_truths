@@ -17,8 +17,8 @@ TagManager:
   - ItemCamera
   - UIObject3D
   - Door
-  - 
-  - 
+  - Enemy
+  - Obstacle
   - 
   - 
   - 
