@@ -10,14 +10,15 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Transform item3DContainer;
     [SerializeField] private Camera itemCamera;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private InspectorUI inspector;
 
     private GameObject current3DItem;
     private bool isInventoryOpen = false;
-    private CursorLockMode previousLockMode;
 
     void Start()
     {
         inventoryPanel.SetActive(false);
+        inspector = inspector.GetComponent<InspectorUI>();
     }
     void Update()
     {
@@ -74,22 +75,23 @@ public class InventoryUI : MonoBehaviour
 
     private void ToggleInventory()
     {
+        if(inspector.isInspectorOpen)
+        {
+            return;
+        }
+
         gameManager.TogglePausedGame();
         isInventoryOpen = !isInventoryOpen;
 
         if(isInventoryOpen)
         {
             inventoryPanel.SetActive(true);
-            ShowCurrentItem();  
-            Cursor.visible = true;
-            previousLockMode = Cursor.lockState;
-            Cursor.lockState = CursorLockMode.None;
+            ShowCurrentItem();
         }
         else
         {
             inventoryPanel.SetActive(false);
             ClearCurrentItem();
-            Cursor.lockState = previousLockMode;
         }
     }
 }

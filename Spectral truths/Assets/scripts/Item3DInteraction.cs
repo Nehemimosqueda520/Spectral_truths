@@ -12,14 +12,11 @@ public class Item3DInteraction : MonoBehaviour
 
     void Update()
     {
-       if (Input.GetMouseButton(1))
-       {
             float rotX = Input.GetAxis("Mouse X") * rotationSpeed * Time.unscaledDeltaTime;
             float rotY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.unscaledDeltaTime;
 
             gameObject.transform.Rotate(Vector3.up, -rotX, Space.World);
             gameObject.transform.Rotate(Vector3.right, rotY, Space.World);
-       }
 
        float scroll = Input.GetAxis("Mouse ScrollWheel");
        if (scroll != 0.0f)

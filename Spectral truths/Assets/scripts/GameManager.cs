@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Time.timeScale = isGamePaused ? 0f : 1f;
-        Cursor.lockState = isGamePaused ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isGamePaused;
     }
 
     public void TogglePausedGame()

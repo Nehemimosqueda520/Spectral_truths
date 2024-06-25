@@ -10,6 +10,7 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private LayerMask pickUpMask;
     [SerializeField] private Transform objectGrabPointTransform;
     [SerializeField] private Inventory playerInventory;
+    [SerializeField] private InspectorUI inspector;
 
     private Transform door;
     private float openDoorAngle = 90f;
@@ -18,9 +19,16 @@ public class PlayerInteractions : MonoBehaviour
     private Quaternion closedDoorRotation;
     private Quaternion openDoorRotation;
     private float interactRange = 60f;
+    private RaycastHit currentHit;
+    private GameObject currentItemObject;
 
     void Start()
     {
+        inspector = inspector.GetComponent<InspectorUI>();
+        inspector.OnItemSaved += HandleItemSaved;
+        inspector.OnInspectorOpened += HandleInspectorOpened;
+        inspector.OnInspectorClosed += HandleInspectorClosed;
+
         closedDoorRotation = Quaternion.Euler(0, 0, 0);
         openDoorRotation = Quaternion.Euler(0, openDoorAngle, 0);
     }
@@ -51,12 +59,24 @@ public class PlayerInteractions : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactRange, recolectableMask))
         {
-            CollectItem(hit);
+            currentHit = hit;
+            GrabItem(hit);
         }
         else if (Physics.Raycast(ray, out hit, interactRange, doorMask))
         {
             isOpen = !isOpen;
             HandleDoor(hit);
+        }
+    }
+
+    private void GrabItem(RaycastHit hit)
+    {
+        Item item = hit.collider.GetComponent<ItemComponent>()?.item;
+        if(item != null)
+        {
+            currentItemObject = hit.collider.gameObject;
+            inspector.current3DItem = currentItemObject;
+            inspector.OpenInspector();
         }
     }
 
@@ -70,6 +90,28 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    private void HandleItemSaved()
+    {
+        Destroy(currentHit.collider.gameObject);
+        currentItemObject = null;
+    }
+
+    private void HandleInspectorOpened()
+    {
+        if (currentItemObject != null)
+        {
+            currentItemObject.SetActive(false);
+        }
+    }
+
+    private void HandleInspectorClosed()
+    {
+        if (currentItemObject != null)
+        {
+            currentItemObject.SetActive(true);
+        }   
+    }
+
     private void HandleDoor(RaycastHit hit)
     {
         InteractableObject obj = hit.collider.GetComponent<InteractableObject>();
@@ -77,6 +119,10 @@ public class PlayerInteractions : MonoBehaviour
         if (obj != null && obj.HasItem())
         {
             door = hit.collider.transform;
+        } 
+        else
+        {
+            UIManager.Instance.ShowInventoryMessage("you need a key to open this door");
         }
     }
 }

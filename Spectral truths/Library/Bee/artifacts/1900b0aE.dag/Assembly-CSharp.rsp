@@ -356,6 +356,7 @@
 "Assets/scripts/Crawl.cs"
 "Assets/scripts/CursorAppearence.cs"
 "Assets/scripts/GameManager.cs"
+"Assets/scripts/InspectorUI.cs"
 "Assets/scripts/InteractableObject.cs"
 "Assets/scripts/Inventory.cs"
 "Assets/scripts/InventoryUI.cs"
@@ -367,6 +368,7 @@
 "Assets/scripts/MainMenu.cs"
 "Assets/scripts/Movement.cs"
 "Assets/scripts/PlayerInteractions.cs"
+"Assets/scripts/UIManager.cs"
 -langversion:9.0
 
 /deterministic

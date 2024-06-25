@@ -19,7 +19,7 @@ public class FlashlightController : MonoBehaviour
     {
         if (!GameManager.isGamePaused)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
 
                 ChangeLight();
@@ -31,7 +31,7 @@ public class FlashlightController : MonoBehaviour
 
     void ChangeLight () {
         if (flashlight != null)
-             {
+            {
                  // Cambia el estado de la luz
                 flashlight.enabled = !flashlight.enabled;
             }

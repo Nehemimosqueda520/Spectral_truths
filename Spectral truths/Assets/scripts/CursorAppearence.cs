@@ -14,19 +14,11 @@ public class CursorAppearence : MonoBehaviour
 
     void OnGUI()
     {
-        if (!isPaused)
+        if (!GameManager.isGamePaused)
         {
             float xMin = (Screen.width / 2) - (crosshairTexture.width / 2);
             float yMin = (Screen.height / 2) - (crosshairTexture.height / 2);
             GUI.DrawTexture(new Rect(xMin, yMin, crosshairTexture.width, crosshairTexture.height), crosshairTexture);
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            isPaused = !isPaused;
         }
     }
 }
