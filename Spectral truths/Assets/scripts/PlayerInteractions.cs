@@ -8,6 +8,7 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private LayerMask recolectableMask;
     [SerializeField] private LayerMask doorMask;
     [SerializeField] private LayerMask pickUpMask;
+    [SerializeField] private LayerMask LampMask;
     [SerializeField] private Transform objectGrabPointTransform;
     [SerializeField] private Inventory playerInventory;
     [SerializeField] private InspectorUI inspector;
@@ -18,6 +19,7 @@ public class PlayerInteractions : MonoBehaviour
     private bool isOpen = false;
     private Quaternion closedDoorRotation;
     private Quaternion openDoorRotation;
+    private Quaternion lampAngleRotation;
     private float interactRange = 60f;
     private RaycastHit currentHit;
     private GameObject currentItemObject;
@@ -31,6 +33,7 @@ public class PlayerInteractions : MonoBehaviour
 
         closedDoorRotation = Quaternion.Euler(0, 0, 0);
         openDoorRotation = Quaternion.Euler(0, openDoorAngle, 0);
+        lampAngleRotation = Quaternion.Euler(-12f, -90f, 0);
     }
     void Update()
     {
@@ -38,6 +41,8 @@ public class PlayerInteractions : MonoBehaviour
         {
             Interact();
         }
+
+        PointToLamp();
 
         if (door)
         {
@@ -66,6 +71,19 @@ public class PlayerInteractions : MonoBehaviour
         {
             isOpen = !isOpen;
             HandleDoor(hit);
+        }
+    }
+
+    private void PointToLamp()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 120f, LampMask))
+        {
+            Transform lamp = hit.collider.gameObject.transform;
+            lamp.rotation = Quaternion.Lerp(lamp.rotation, lampAngleRotation, Time.deltaTime * 2f);
+
         }
     }
 
